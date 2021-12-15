@@ -4,7 +4,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from database import Base #Se importa el objeto Base desde el archivo database.py
+from .database import Base #Se importa el objeto Base desde el archivo database.py
 
 class new(Base): 
 
@@ -16,15 +16,14 @@ class new(Base):
     url =  Column(String(100))
     media_outlet =  Column(String(100))
 
-    items = relationship("category", back_populates="owner")
+    items = relationship("has_category", back_populates="owner")
 
-class category(Base):
+class has_category(Base):
 
     __tablename__ = "category"
 
     id = Column(Integer, primary_key=True,index=True)
     value = Column(String(50), index=True)
-    newTitle = Column(String(50),ForeignKey("news.title"))
-    ####id2 = Column(Integer,ForeignKey("news.id"))
+    id2 = Column(Integer,ForeignKey("news.id"))
 
-    owner = relationship("new", back_populates="category")
+    owner = relationship("news", back_populates="category")

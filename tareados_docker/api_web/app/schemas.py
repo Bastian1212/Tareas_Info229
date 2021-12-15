@@ -3,37 +3,37 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 
-class  categoryBase(BaseModel):
+class  has_categoryBase(BaseModel):
   value: str
 
-class categoryCreate(categoryBase):
+class has_categoryCreate(has_categoryBase):
   pass
 
 
-class category(categoryBase):
+class has_category(has_categoryBase):
 
 
   id : int 
-  newTitle: str
+  id2 : int
   class Config:
     orm_mode = True 
 
 
-class newBase(BaseModel):
+class newsBase(BaseModel):
 
   title : str
   date : str
   url : str
   media_outlet :str
 
-class newCreate(newBase):
+class newsCreate(newsBase):
   pass
 
-class new(newBase):
+class news(newsBase):
 
   id : int 
 
-  categorys : List[category] = []
+  value : List[has_category] = []
 
   class Config:
 
